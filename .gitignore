@@ -1,0 +1,4 @@
+/djangoblog/settings.py
+.idea/
+media_cdn/
+static_cdn/
