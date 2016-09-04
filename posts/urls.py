@@ -9,9 +9,9 @@ urlpatterns = [
     # /posts/create
     url(r'^create/$', views.post_create, name='create'),
     # /posts/<post_id>
-    url(r'^(?P<post_id>\d+)/$', views.post_detail, name='detail'),
+    url(r'^(?P<slug>[\w-]+)/$', views.post_detail, name='detail'),
     # /posts/<post_id>/edit
-    url(r'^(?P<post_id>\d+)/edit/$', views.post_update, name='update'),
+    url(r'^(?P<slug>[\w-]+)/edit/$', views.post_update, name='update'),
     # /posts/<post_id>/delete
-    url(r'^(?P<post_id>\d+)/delete/$', views.post_delete, name='delete'),
+    url(r'^(?P<slug>[\w-]+)/delete/$', views.post_delete, name='delete'),
 ]

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load urlify %}
 
 {% block title %}
     {{ post.title }} | {{ block.super }}
@@ -17,38 +17,70 @@
         <div class="col-lg-8">
             <h1>{{ post.title }}</h1>
             <p class="lead">
-                by <a href="#">Admin</a>
+                by <a href="#">{{ post.user }}</a>
+            </p>
+            <p>
+                <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+            </p>
+{#            <p>#}
+{#                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">#}
+{#Facebook#}
+{#</a>#}
+{#                <a href="https://twitter.com/home?status={{ post.content|urlify }}%20{{ request.build_absolute_uri }}">#}
+{#Twitter#}
+{#</a>#}
+{##}
+{#                <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google</a>#}
+{##}
+{##}
+{#                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ post.content|urlify }}&source={{ request.build_absolute_uri }}">#}
+{#Linkedin#}
+{#</a>#}
+{##}
+{#                <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ post.content|urlify }}.">Reddit</a>#}
+{##}
+{#            </p>#}
+            <hr>
+            <p>
+                <span class="glyphicon glyphicon-time"></span> {{ post.publish }}
+                {% if post.draft %}<span style="color:red">Draft</span>{% endif %}
             </p>
             <hr>
-            <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.created }}</p>
-            <hr>
-            <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+
+            {% if post.image %}
+                <img class="img-responsive" src="{{ post.image.url }}" alt="">
+            {% endif %}
             <hr>
             <p>{{ post.content|linebreaks }}</p>
             <hr>
             <!-- Comments Form -->
-            <div class="well">
-                <h4>Leave a Comment:</h4>
-                <form role="form">
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <hr>
-            <!-- Comment -->
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="http://placehold.it/64x64" alt="">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">Start Bootstrap
-                        <small>August 25, 2014 at 9:30 PM</small>
-                    </h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
+
+            <div data-width="100%" class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+
+
+{#            <div class="well">#}
+{#                <h4>Leave a Comment:</h4>#}
+{#                <form role="form">#}
+{#                    <div class="form-group">#}
+{#                        <textarea class="form-control" rows="3"></textarea>#}
+{#                    </div>#}
+{#                    <button type="submit" class="btn btn-primary">Submit</button>#}
+{#                </form>#}
+{#            </div>#}
+{#            <hr>#}
+{#            <!-- Comment -->#}
+{#            <div class="media">#}
+{#                <a class="pull-left" href="#">#}
+{#                    <img class="media-object" src="http://placehold.it/64x64" alt="">#}
+{#                </a>#}
+{#                <div class="media-body">#}
+{#                    <h4 class="media-heading">Start Bootstrap#}
+{#                        <small>August 25, 2014 at 9:30 PM</small>#}
+{#                    </h4>#}
+{#                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
+{#                </div>#}
+{#            </div>#}
         </div>
 
     {% include "sidebar.html" %}
